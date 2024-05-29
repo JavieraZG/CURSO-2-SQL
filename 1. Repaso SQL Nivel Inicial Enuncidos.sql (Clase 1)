@@ -11,7 +11,7 @@ Fecha: 02-05-2024
 
 -- Antes de empezar Explora las tablas
 
-SELECT * FROM department;
+SELECT* FROM department;
 SELECT * FROM branch;
 SELECT * FROM employee;
 SELECT * FROM product_type;
@@ -20,7 +20,7 @@ SELECT * FROM individual;
 SELECT * FROM business;
 SELECT * FROM officer;
 SELECT * FROM account;
-SELECT * FROM "transaction"
+SELECT * FROM transaction;
 
 
 -- Selección y order
