@@ -12,7 +12,8 @@ Fecha: 30-05-2024
 
 -- 1. Explora la tabla invoice
 
-SELECT * FROM invoice;
+SELECT * 
+FROM invoice;
 
 -- 2. Explora el total de ventas de la tabla invoice
 	
@@ -32,9 +33,9 @@ FROM invoice;
 
 SELECT
 	Customer_Id,
-    Invoice_Id,
+    	Invoice_Id,
 	Invoice_Date,
-    Total,
+    	Total,
 	SUM(total) OVER() AS total_over_all
 FROM invoice;
 
@@ -47,10 +48,10 @@ nota: Como cada invoice_id es un valor único no es necesario editar el FRAME de
 	
 SELECT
 	Customer_Id,
-    Invoice_Id,
+   	Invoice_Id,
 	Invoice_Date,
-    Total,
-	SUM(total) OVER(ORDER BY invoice_id) AS running_sum
+  	Total,
+	SUM(total) OVER( ORDER BY invoice_id) AS running_sum
 FROM invoice;
 
 	
@@ -69,7 +70,7 @@ SELECT
     Invoice_Id,
 	Invoice_Date,
     Total,
-	SUM(total) OVER(PARTITION BY customer_id) AS running_sum
+	SUM(total) OVER( PARTITION BY customer_id) AS running_sum
 FROM invoice;
 
 
@@ -80,7 +81,7 @@ SELECT
     Invoice_Id,
 	Invoice_Date,
     Total,
-	SUM(total) OVER(PARTITION BY customer_id	ORDER BY invoice_date) AS running_sum
+	SUM(total) OVER( PARTITION BY customer_id   ORDER BY invoice_date) AS running_sum
 FROM invoice;
 
 
