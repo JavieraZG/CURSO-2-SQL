@@ -24,11 +24,9 @@ SELECT * FROM product;
 SELECT * FROM account;
 
 
-SELECT 
-	p.product_cd, 
+SELECT 	p.product_cd, 
 	p.name
-FROM
-	product p
+FROM	product p
 LEFT JOIN account a ON p.product_cd = a.product_cd
 WHERE a.product_cd IS NULL;
 
@@ -61,14 +59,12 @@ SELECT * FROM individual;
 SELECT * FROM business;
 
 
-SELECT 
-	account.account_id,
+SELECT 	account.account_id,
 	account.product_cd,
 	individual.fname, 
 	individual.lname,
 	business.name AS business
-FROM 
-	account
+FROM 	account
 LEFT JOIN
 	individual ON account.cust_id = individual.cust_id
 LEFT JOIN
@@ -98,8 +94,7 @@ SELECT
     e.title, 
     e.assigned_branch_id, 
     b.name
-FROM 
-    employee AS e
+FROM  employee AS e
 JOIN 
     branch AS b ON e.assigned_branch_id = b.branch_id
 WHERE 
@@ -137,8 +132,7 @@ SELECT
     a.cust_id, 
     a.open_date, 
     a.product_cd
-FROM 
-    account AS a
+FROM  account AS a
 JOIN 
     (SELECT 
     	e.emp_id, 
@@ -185,8 +179,7 @@ SELECT
     emp.lname AS apellido_emp,
     jef.fname AS nombre_supervisor,
     jef.lname AS apellido_supervisor
-FROM 
-    employee AS emp
+FROM  employee AS emp
 LEFT JOIN 
     employee AS jef ON emp.superior_emp_id = jef.emp_id;
 
