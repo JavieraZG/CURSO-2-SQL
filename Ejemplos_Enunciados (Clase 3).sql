@@ -33,8 +33,8 @@ FROM employee;
 -- 	resultado por sal_max descendiente.
 
 SELECT 	
-		dept_name,
-		MAX(salary) AS sal_max
+	dept_name,
+	MAX(salary) AS sal_max
 FROM 	employee
 GROUP BY dept_name
 ORDER BY sal_max DESC;
@@ -46,8 +46,8 @@ ORDER BY sal_max DESC;
 -- 2.a Obten la tabla employee más una columna con el salario máximo.
 
 SELECT 	
-		e.*, 							 --Con esto (*) puedo llamar todas las columnas de la tabla--
-		MAX(salary) OVER ()
+	e.*, 							 --Con esto (*) puedo llamar todas las columnas de la tabla--
+	MAX(salary) OVER ()
 FROM 	employee e;
 
 
@@ -55,8 +55,8 @@ FROM 	employee e;
 
 
 SELECT 	
-		e.*,
-		MAX(salary) OVER () AS sal_max_comp
+	e.*,
+	MAX(salary) OVER () AS sal_max_comp
 FROM 	employee e;
 
 
@@ -64,8 +64,8 @@ FROM 	employee e;
 -- 2.c Obten la tabla employee más una columna con el salario máximo del depto correspondiente a cada registro
 
 SELECT 	
-		e.*,
-		MAX(salary) OVER (PARTITION BY dept_name) AS sal_max_dpto
+	e.*,
+	MAX(salary) OVER (PARTITION BY dept_name) AS sal_max_dpto
 FROM 	employee e;
 
 
@@ -80,17 +80,17 @@ FROM 	employee e;
 -- CON 
 
 SELECT
-	*,
+	e.*,
 	max(salary) OVER( PARTITION BY dept_name)
-FROM employee
+FROM employee e
 ORDER BY salary DESC;
 	
 -- SIN 
 
 SELECT
-	*,
+	e.*,
 	max(salary) OVER()
-FROM employee
+FROM employee e
 ORDER BY salary DESC;
 	
 
@@ -211,9 +211,9 @@ FROM employee e
 
 -- ahora es posible filtar pero no podemos hacerlo directamente. Debemos hacer una subconsulta
 
-SELECT
-*
-FROM (
+SELECT	
+	*
+FROM 	(
 	SELECT
 	e.*,
 	ROW_NUMBER () OVER(PARTITION BY dept_name ORDER BY emp_id) AS rn_depto
@@ -230,14 +230,22 @@ WHERE rn_depto <= 2;
 
 SELECT
 	e.*,
-	RANK() OVER(PARTITION BY dept_name ORDER BY salary DESC)
+	RANK() OVER(PARTITION BY dept_name ORDER BY salary DESC) AS rk_salary
 FROM employee e;
 
 
 -- 7.b Cuando hay registros que tienen el mismo valor, se les asigna el mismo ranking 
 -- y el se salta los valores cuando existen valores repetidos ej 1,2,2,4
 
-
+SELECT
+	*
+FROM 	(
+	SELECT
+	e.*,
+	RANK() OVER(PARTITION BY dept_name ORDER BY salary DESC) AS rk_salary
+	FROM employee e
+	)
+WHERE rk_salary <= 3;
 
 
 -- #################
